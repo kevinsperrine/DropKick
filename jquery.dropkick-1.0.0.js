@@ -212,12 +212,19 @@
    * usage: $("...").dropkick('reload');
    */
   methods.reload = function () {
-    var  $select = $(this);
-    var  data = $select.data('dropkick');
+    var $select = $(this),
+        data = $select.data('dropkick');
+
+    // quickly show the select, so that the size is also updated properly
+    // when using percentage width selects
+    $select.show();
 
     $select.removeData("dropkick");
     $("#dk_container_"+ data.id).remove();
     $select.dropkick(data.settings);
+    
+    // Hide it after the reload
+    $select.hide();
   };
 
   // Reset all <selects and dropdowns in our lists array
